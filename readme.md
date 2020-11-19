@@ -31,14 +31,13 @@ SELENOID_ADRESS = "[адресс для подключения к selenoid пр�
 
 
 #### Запуск на сервере 
-Для запуска на сервере выполните 
+Для настройки сервера выполните
 
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install git python3-pip
-git clone https://github.com/Neafiol/bmbets-parser
-cd bmbets-parser
+git clone https://github.com/Neafiol/yamarket-search-parser
+cd yamarket-search-parser
 bash ./install.sh
-bash ./run.sh
 ```

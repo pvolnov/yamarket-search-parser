@@ -1,0 +1,10 @@
+titem.pk
+geckodriver.log
+build
+dist
+venv
+.idea
+.ipynb_checkpoints
+yabot.spec
+__pycache__
+data

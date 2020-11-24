@@ -4,9 +4,9 @@ import time
 import traceback
 from multiprocessing import Process
 
+import requests
 from bs4 import BeautifulSoup
 from peewee import fn
-from pip._vendor import requests
 from playhouse.shortcuts import model_to_dict
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options

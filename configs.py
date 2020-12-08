@@ -1,6 +1,6 @@
 db_name = 'bitech'
 db_login = 'postgres'
-db_password = '********'
+db_password = 'nef441'
 db_host = 'sw.neafiol.site'
 db_port = 5432
 

@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-u", "--export", action="store_true", dest="file_load_path")
+    parser.add_argument("-u", "--upload", action="store_true", dest="file_load_path")
     parser.add_argument("-e", "--export", action="store_true", dest="file_export_path")
     parser.add_argument("-s", "--status", action="store_true", dest="show_status")
     parser.add_argument("-i", "--init", action="store_true", dest="init")
@@ -78,7 +78,7 @@ if __name__ == "__main__":
         print(f"Loaded {n}/{n1} tasks")
 
     if args.file_load_path:
-        data = get_current_tasks()
+        data = list(pd.read_csv("tasks.csv")["orig_name"])
         n = SearchResult.insert_many([{"orig_name": line} for line in data]).on_conflict_ignore().execute()
         print(f"Added {len(data)} tasks")
 
@@ -101,5 +101,5 @@ if __name__ == "__main__":
                                         re.findall(r"\d+,?\d*", i.orig_name)) else "",
                                     "options": ";".join([o["name"] for o in i.options]),
                                     **i.specifications
-                                    } for i in items]).to_csv("result.csv")
+                                    } for i in items]).to_csv("tasks.csv")
         print(f"complete {len(items)} tasks")

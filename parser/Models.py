@@ -1,10 +1,9 @@
 from peewee import Model, TextField, BooleanField, IntegerField
-from playhouse.postgres_ext import PostgresqlExtDatabase, JSONField
+from playhouse.postgres_ext import MySQLDatabase, JSONField
 
 from configs import *
 
-db = PostgresqlExtDatabase(db_name, user=db_login, password=db_password,
-                           host=db_host, port=db_port)
+db = MySQLDatabase(db_name, user=db_login, password=db_password, host=db_host)
 
 
 class SearchResult(Model):
@@ -13,7 +12,7 @@ class SearchResult(Model):
     url = TextField(default="")
     options = JSONField(default=[])
     specifications = JSONField(default={})
-    done = BooleanField(default=False)
+    done = IntegerField(default=0)
 
     class Meta:
         database = db

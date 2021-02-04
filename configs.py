@@ -1,13 +1,14 @@
-db_name = 'bitech'
-db_login = 'postgres'
-db_password = 'nef441'
-db_host = 'sw.neafiol.site'
-db_port = 5432
+db_name = 'test'
+db_login = 'siunval'
+db_password = 'Sada2131'
+db_host = 'localhost'
+db_port = 3306
 
-db_ms_name = 'bitech'
-db_ms_login = 'SA'
-db_ms_password = 'Admin111'
+db_ms_name = 'renat'
+db_ms_login = 'siunval'
+db_ms_password = 'Sada2131'
 db_ms_host = 'localhost'
+db_ms_port = 3306
 
-RU_CAPTCHA_APY_KEY = "3e12df6ed3a4c0e9e7b2c951bb2c9c51"
-SELENOID_ADRESS = "http://dig2.neafiol.site:4444/wd/hub"
+RU_CAPTCHA_APY_KEY = "b531d34959ca818f49c9717f0c7eb608"
+SELENOID_ADRESS = "http://localhost:4444/wd/hub"

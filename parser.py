@@ -13,7 +13,7 @@ if __name__ == "__main__":
             if t.is_alive():
                 alive += 1
 
-        while alive < 3:
+        while alive < 1:
             alive += 1
             t = Parser(alive)
             t.start()

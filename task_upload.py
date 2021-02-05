@@ -78,7 +78,7 @@ if __name__ == "__main__":
         print(f"Loaded {n}/{n1} tasks")
 
     if args.file_load_path:
-        data = list(pd.read_csv("tasks.csv")["orig_name"])
+        data = get_current_tasks()
         n = SearchResult.insert_many([{"orig_name": line} for line in data]).on_conflict_ignore().execute()
         print(f"Added {len(data)} tasks")
 

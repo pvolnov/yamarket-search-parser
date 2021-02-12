@@ -13,26 +13,20 @@ data = [{x.keys()[i]: x[i] for i in range(len(x))} for x in raw_data]
 
 key = set()
 for i in data:
-    try:
-        for j in list(json.loads(i["specifications"].replace('\\\\', '\\')).keys()):
-            key.add(j)
-    except AttributeError as err:
-        print(err)
+    for j in list(json.loads(i["specifications"].replace('\\\\', '\\')).keys()):
+        key.add(j)
 
 res = list()
 for i in data:
     dct = {"orig_name": i["orig_name"]}
-    try:
-        if len(json.loads(i["specifications"].replace('\\\\', '\\')).values()) == 0:
+    if len(json.loads(i["specifications"].replace('\\\\', '\\')).values()) == 0:
+        continue
+    for j in sorted(key):
+        try:
+            dct.update({j: json.loads(i["specifications"].replace('\\\\', '\\'))[j]})
+        except KeyError:
             continue
-        for j in sorted(key):
-            try:
-                dct.update({j: json.loads(i["specifications"].replace('\\\\', '\\'))[j]})
-            except KeyError:
-                continue
-        res.append(dct)
-    except AttributeError as err:
-        print(err)
+    res.append(dct)
 
 for r in res:
     dct = {"ya_category" if i == "category" else i: r[i] if i in r.keys() else None for i in ["brend",

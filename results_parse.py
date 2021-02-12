@@ -13,8 +13,11 @@ data = [{x.keys()[i]: x[i] for i in range(len(x))} for x in raw_data]
 
 key = set()
 for i in data:
-    for j in list(json.loads(i["specifications"].replace('\\\\', '\\')).keys()):
-        key.add(j)
+    try:
+        for j in list(json.loads(i["specifications"].replace('\\\\', '\\')).keys()):
+            key.add(j)
+    except AttributeError as err:
+        print(err)
 
 res = list()
 for i in data:

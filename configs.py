@@ -1,12 +1,12 @@
 db_name = 'test'
-db_login = 'siunval'
-db_password = 'Sada2131'
+db_login = ''
+db_password = ''
 db_host = 'localhost'
 db_port = 3306
 
 db_ms_name = 'renat'
-db_ms_login = 'siunval'
-db_ms_password = 'Sada2131'
+db_ms_login = ''
+db_ms_password = ''
 db_ms_host = 'localhost'
 db_ms_port = 3306
 

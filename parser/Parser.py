@@ -173,8 +173,11 @@ class Parser(Process):
 
         while True:
             try:
-                tasks = SearchResult.select().where(SearchResult.done == False).limit(100).order_by(
-                    fn.random()).execute()
+                print("Getting tasks")
+                query = SearchResult.select().where(SearchResult.done == False).limit(100)
+                tasks = query.execute()
+                print("Task is got")
+                print(tasks)
                 for task in tasks:
 
                     try:

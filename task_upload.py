@@ -10,7 +10,7 @@ from sqlalchemy.orm import sessionmaker
 from configs import db_ms_login, db_ms_password, db_ms_host, db_ms_name
 from parser.Models import SearchResult, MergeData
 
-engine = sa.create_engine(f"mssql+pymssql://{db_ms_login}:{db_ms_password}@{db_ms_host}/{db_ms_name}", echo=False)
+engine = sa.create_engine(f"mysql+pymysql://{db_ms_login}:{db_ms_password}@{db_ms_host}/{db_ms_name}", echo=False)
 connection = engine.connect()
 
 Session = sessionmaker(bind=engine)
@@ -78,12 +78,13 @@ if __name__ == "__main__":
         print(f"Loaded {n}/{n1} tasks")
 
     if args.file_load_path:
-        data = list(pd.read_csv("tasks.csv")["orig_name"])
+        data = get_current_tasks()
         n = SearchResult.insert_many([{"orig_name": line} for line in data]).on_conflict_ignore().execute()
         print(f"Added {len(data)} tasks")
 
     if args.file_export_path:
         data = get_current_tasks()
+        print(data)
         print(f"Export {len(data)} items begin")
 
         items = SearchResult.select().where(SearchResult.orig_name.in_(data)).execute()
@@ -94,12 +95,12 @@ if __name__ == "__main__":
                                specifications=json.dumps(it.specifications)))
         session.commit()
 
-        pd.DataFrame.from_records([{"orig_name": i.orig_name,
-                                    "name": i.name,
-                                    "url": i.url,
-                                    "volume": re.findall(r"\d+,?\d*", i.orig_name)[0] if len(
-                                        re.findall(r"\d+,?\d*", i.orig_name)) else "",
-                                    "options": ";".join([o["name"] for o in i.options]),
-                                    **i.specifications
-                                    } for i in items]).to_csv("tasks.csv")
+        # pd.DataFrame.from_records([{"orig_name": i.orig_name,
+        #                             "name": i.name,
+        #                             "url": i.url,
+        #                             "volume": re.findall(r"\d+,?\d*", i.orig_name)[0] if len(
+        #                                 re.findall(r"\d+,?\d*", i.orig_name)) else "",
+        #                             "options": ";".join([o["name"] for o in i.options]),
+        #                             **i.specifications
+        #                             } for i in items]).to_csv("tasks.csv")
         print(f"complete {len(items)} tasks")
